@@ -108,3 +108,18 @@ st.bar_chart(df_plot, x = 'Category', y = 'count')
 
 st.write("Here we are at the end of getting started with streamlit! Happy Streamlit-ing! :balloon:")
 
+
+
+
+
+import streamlit as st
+
+# Initialize connection.
+conn = st.connection('mysql', type='sql')
+
+# Perform query.
+df = conn.query('SELECT * FROM Mice;', ttl=0)
+
+# Print results.
+for row in df.itertuples():
+    st.write(row)
