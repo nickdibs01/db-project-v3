@@ -90,7 +90,7 @@ else:
         st.dataframe(conn.query(select2, ttl=1).drop(pkeys[table_name], axis=1), hide_index=True)
 
 
-if table_name == "Sequencing" and len(IDs) != 0:
+if table_name == "Sequencing" and len(IDs) != 0 and filter == True:
     st.write("Sequence Data")
     select3 = ("SELECT s.SequenceID,DataDescription,DatabaseName,AccessionNumber,URL FROM "
                "DataRepository AS dr JOIN Sequencing AS s ON dr.SequenceID=s.SequenceID WHERE ")
@@ -107,4 +107,7 @@ if table_name == "Sequencing" and len(IDs) != 0:
         st.write("There are no available datasets for any of these sequences :slightly_frowning_face:")
     else:
         st.dataframe(data_rep_df, hide_index=True, column_config={"URL": st.column_config.LinkColumn("URL")})
-
+elif table_name == "Sequencing" and filter == False:
+    st.write("Sequence Data")
+    st.dataframe(conn.query("SELECT * FROM DataRepository"), hide_index=True,
+                 column_config={"URL": st.column_config.LinkColumn("URL")})
