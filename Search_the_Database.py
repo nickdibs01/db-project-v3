@@ -1,8 +1,12 @@
 import streamlit as st 
 import pandas as pd
 
-st.set_page_config(layout="wide")
+st.set_page_config(
+    page_title="Database Search",
+    page_icon="🧬",
+    layout="wide")
 
+st.sidebar.success("What you would like to do?")
 
 st.title("Delirium and Sepsis in Transgenic Mice Database")
 
@@ -111,3 +115,6 @@ elif table_name == "Sequencing" and filter == False:
     st.write("Sequence Data")
     st.dataframe(conn.query("SELECT * FROM DataRepository"), hide_index=True,
                  column_config={"URL": st.column_config.LinkColumn("URL")})
+
+
+
